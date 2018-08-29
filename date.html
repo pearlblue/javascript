@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2>현재날짜시간출력</h2>
+  <div id="date"></div>
+
+
+  <script>
+    //내장객체: 자바스크립트 내부에서 만들어져서 제공하는 객체
+    //Date : 날짜, ㅅ간, 요일에 대한 정보가 들어 있는 객체
+
+    //현재 날짜와 시간을 출력해주는 함수 만들기
+    function startDate(){
+      var now=new Date();//Date 객체 생성
+      var year=now.getFullYear();
+      var month=now.getMonth()+1;//0부터 시작하므로 +1을 해준다.
+      var date=now.getDate();
+      var day=now.getDay();//요일
+      var hours=now.getHours();
+      var minutes=now.getMinutes();
+      var seconds=now.getSeconds();
+      var mSeconds=now.getMilliseconds();//밀리세컨즈
+      var ampm='오전';//오전 또는 오후를 저장하는 변수
+
+      if (hours>=12) {
+        ampm='오후';
+        //현재 시간이 12시 이상일 때 12=>0, 12=>1로 변경하기
+        hours=hours-12;
+      }
+
+      //요일 구하기
+      var days=['일','월','화','수','목','금','토'];
+
+      var date=year+'.'+zero(month)+'.'+zero(date)+'('+days[day]+')';
+      var time=ampm+' '+zero(hours)+':'+zero(minutes)+':'+zero(seconds)+':'+mSeconds;
+
+      document.getElementById('date').innerHTML=date+'<br>'+time;
+    }
+
+    //함수 호출하기
+    startDate();
+
+    //타이머함수:일정시간마다 함수를 호출한다.
+    setInterval(startDate,10);
+
+    //두자리패턴으로 만들어주는 함수
+    function zero(num){//두자리 패턴으로 만들기 위해 받아오는 값
+      if (num<10) {//빋이언 슷자가 10보다 작을 경우 앞에 0을 붙여준다.
+        num='0'+num;//문자열 0과 숫자를 붙여준 값을 저장
+      }
+      return num;//검사를 거친 값 num을 반환시켜준다.
+    }
+
+
+  </script>
+</body>
+</html>
